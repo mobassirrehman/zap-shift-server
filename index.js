@@ -217,7 +217,6 @@ async function run() {
       res.send(result);
     });
 
-    // TODO: rename this to be specific like /parcels/:id/assign
     app.patch("/parcels/:id", async (req, res) => {
       const { riderId, riderName, riderEmail, trackingId } = req.body;
       const id = req.params.id;
@@ -403,7 +402,7 @@ async function run() {
 
           logTracking(trackingId, "parcel_paid");
 
-          res.send({
+          return res.send({
             success: true,
             modifyParcel: result,
             trackingId: trackingId,
@@ -413,7 +412,7 @@ async function run() {
         }
       }
 
-      res.send({ success: false });
+      return res.send({ success: false });
     });
 
     // payment related apis
